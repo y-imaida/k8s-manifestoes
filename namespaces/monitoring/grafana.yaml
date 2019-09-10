@@ -5,16 +5,16 @@ metadata:
   name: grafana
   namespace: monitoring
   labels:
-    app: monitoring
+    app: grafana
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: monitoring
+      app: grafana
   template:
     metadata:
       labels:
-        app: monitoring
+        app: grafana
     spec:
       containers:
         - name: grafana
