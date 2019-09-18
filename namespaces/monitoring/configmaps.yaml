@@ -1,1 +1,22 @@
-# grafanaおよびprometheusの設定ファイルをConfigMapとして登録する
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: prometheus-config
+  namespace: monitoring
+data:
+  prometheus.yml: |
+    global:
+      scrape_interval:     15s # Set the scrape interval to every 15 seconds. Default is every 1 minute.
+      evaluation_interval: 15s # Evaluate rules every 15 seconds. The default is every 1 minute.
+
+    scrape_configs:
+      - job_name: 'prometheus'
+        static_configs:
+        - targets: ['localhost:9090']
+      - job_name: 'robot16'
+        static_configs:
+        - targets:
+          - 133.167.117.200:9100
+          - 133.167.117.200:9104
+          - 133.167.117.200:9915
