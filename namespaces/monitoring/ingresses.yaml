@@ -1,0 +1,19 @@
+---
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: grafana
+  namespace: monitoring
+spec:
+  tls:
+    - hosts:
+      - grafana.ariston.jp-tok.containers.appdomain.cloud
+      secretName: ariston
+  rules:
+    - host: grafana.ariston.jp-tok.containers.appdomain.cloud
+      http:
+        paths:
+          - path: /
+            backend:
+              serviceName: grafana-webui
+              servicePort: 3000
