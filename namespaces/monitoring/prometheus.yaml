@@ -31,3 +31,12 @@ spec:
         - name: prometheus-pvc
           persistentVolumeClaim:
             claimName: prometheus-pvc
+      initContainers:
+        - name: change-permission
+          image: alpine:latest
+          command: ["/bin/sh", "-c"]
+          args:
+            - chown 65534:65534 /prometheus;
+          volumeMounts:
+            - name: prometheus-pvc
+              mountPath: /prometheus

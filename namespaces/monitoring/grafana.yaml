@@ -26,3 +26,12 @@ spec:
         - name: grafana-pvc
           persistentVolumeClaim:
             claimName: grafana-pvc
+      initContainers:
+        - name: change-permission
+          image: alpine:latest
+          command: ["/bin/sh", "-c"]
+          args:
+            - chown 472:472 /var/lib/grafana;
+          volumeMounts:
+            - name: grafana-pvc
+              mountPath: /var/lib/grafana
